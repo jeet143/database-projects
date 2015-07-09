@@ -1,0 +1,74 @@
+1.select * from borrower where department='electrical engineering' and type='faculty'
+
+
+
+
+
+(to join tables)2.SELECT *
+from borrower
+inner join book on book.isbn = borrower.isbn
+
+after joining----
+SELECT avg(borrowed_copies) from borrower WHERE department='computer science' and type='graduate student'
+
+
+
+
+
+
+
+(to join tables)3.SELECT *
+from borrower
+inner join book on book.isbn = borrower.isbn
+
+ SELECT max(no_of_copies) type,name from borrower,book where borrower.type='vocational student' and book.type='english book'           
+
+
+
+
+
+
+(to join tables)//4.select bo.*, b.fine_type as fine_as_per_book , DATEDIFF (due_date,return_date) as number_of_days , floor (b.fine_type * DATEDIFF (due_date,return_date)) final_fine_calculated from book b, borrows bo, borrower u ,book_type bt where b.book_id = bt.book_id and bo.borrower_id = u.borrower_id and b.book_id = bt.book_id and u.type='Undergraduate student'
+
+
+
+
+
+
+
+
+5.update borrows set due_date='2015-08-04' where borrows_id = (SELECT borrows_id from (select * from borrows) abhi inner join book on book.isbn = abhi.isbn inner join borrower on abhi.borrower_id = borrower.borrower_id where book.book_name='wren n martin' and borrower.username='1111')
+
+
+
+6.select DISTINCT b1.book_name
+from (select DISTINCT isbn,book_name from book where branch_id=(select branch_id from library where branch_name='kretzman hall')) as b1
+where NOT EXISTS (select * from 
+(select DISTINCT isbn from book where branch_id=(select branch_id from library where branch_name='kretzman hall') and  NOT EXISTS (select * from book,book_type where book.book_id=book_type.book_id))
+as b2 where  b1.isbn=b2.isbn)
+
+
+
+
+
+
+7.SELECT DISTINCT B.book_name,B.book_id FROM BOOK B, LIBRARY L WHERE B.branch_id=L.branch_id AND upper(L.branch_name)='alhambra library'
+                                                               OR
+  SELECT DISTINCT B.book_name FROM BOOK B, LIBRARY L WHERE B.branch_id=L.branch_id AND upper(L.branch_name)='alhambra library'    
+
+
+
+
+
+
+ 8.SELECT borrows_return.borrows_id retuen, borrows_checkout.borrows_id ,borrower.name, borrower.department FROM borrows borrows_return, borrows borrows_checkout, borrower WHERE borrower.borrower_id = borrows_return.borrower_id AND borrower.borrower_id = borrows_return.borrower_id AND department='finance' AND borrows_return.borrows_id = borrows_checkout.borrows_id AND borrows_checkout.return_date is null 
+
+
+
+ 9.
+ SELECT * from library inner join book on book.branch_id = library.branch_id inner join borrows on borrows.isbn = library.isbn where library.branch_name = 'alhambra library' and book.loan_type = 'short loan'
+
+
+
+ 10.(select max(b.no_of_copies),b.publish_press from   
+					library lib, book b where lib.branch_id=b.branch_id  and lib.branch_id=b.branch_id group by 'publishpress', lib.branch_id)
