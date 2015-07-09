@@ -1,0 +1,313 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 14, 2015 at 01:28 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `library mgmt`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book`
+--
+
+CREATE TABLE IF NOT EXISTS `book` (
+  `book_id` int(11) NOT NULL,
+`isbn` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `no_of_copies` int(11) NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `book_name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `publish_press` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `price` int(11) NOT NULL,
+  `fine_type` float NOT NULL,
+  `no_of_words` int(11) NOT NULL,
+  `brief_intro` varchar(255) NOT NULL,
+  `catalog_no` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `publish_date` date NOT NULL,
+  `registration_date` date NOT NULL,
+  `loan_type` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`book_id`, `isbn`, `type`, `no_of_copies`, `branch_id`, `book_name`, `publish_press`, `price`, `fine_type`, `no_of_words`, `brief_intro`, `catalog_no`, `author`, `publish_date`, `registration_date`, `loan_type`) VALUES
+(1, 1, 'english book', 5, 101, 'wren n martin', 'blue_star', 150, 0.2, 50000, 'consists of grammars and knowledge of tense', '1', 'abhijeet joshi', '2014-05-04', '2015-01-01', 'english book'),
+(2, 2, 'foreign book', 9, 201, 'data structure', 'tmgraw hill', 175, 0.5, 60000, 'consists of algorithms and searching-sorting methods', '25', 'abhinav joshi', '2014-06-04', '2015-01-07', 'foreign book'),
+(3, 3, 'new book', 15, 301, 'database management system', 'PN publications', 180, 0.5, 60000, 'contains the queries and relational algebra', '56', 'elmasari', '2014-06-12', '2015-01-14', 'short loan'),
+(4, 4, 'english book', 54, 101, 'da vinci code', 'er publications', 110, 0.2, 20000, 'mysterious fiction novel', '8855', 'sachin', '2014-03-12', '2015-01-05', 'english book'),
+(5, 5, 'foreign book', 55, 201, 'general knowledge', 'zq publications', 142, 0.5, 20000, 'consiste of general knowledge of world aspects', '55', 'hemang', '2014-05-07', '2015-01-09', 'foreign book'),
+(6, 6, 'new book', 65, 301, 'oxford dictionary', 'oxford university', 95, 0.2, 50000, 'consists of all the meaning of words', '75', 'oxford ', '2014-04-15', '2015-01-13', 'short loan'),
+(7, 7, 'foreign book', 15, 101, 'tempest', 'fiction world', 55, 0.5, 30000, 'consists of novel related to the journey', '78', 'shakespeare', '2014-07-24', '2015-01-24', 'foreign book'),
+(8, 8, 'new book', 52, 201, 'superman', 'marvel comics', 15, 0.2, 2000, 'consists of comic characters details', '884', 'steve', '2014-07-16', '2015-01-31', 'new book'),
+(9, 9, 'new book', 755, 101, 'microbiology', 'calstatela', 750, 0.5, 200000, 'consists of details abiut organisms', '1001', 'john', '2014-08-06', '2015-01-29', 'short loan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_copies`
+--
+
+CREATE TABLE IF NOT EXISTS `book_copies` (
+  `isbn` int(11) NOT NULL,
+  `borrower_id` int(11) NOT NULL,
+  `registration date` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `book_copies_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_type`
+--
+
+CREATE TABLE IF NOT EXISTS `book_type` (
+  `book_id` int(11) NOT NULL,
+  `isbn` int(11) NOT NULL,
+  `book_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `book_type`
+--
+
+INSERT INTO `book_type` (`book_id`, `isbn`, `book_name`) VALUES
+(1, 1000, 'english book'),
+(2, 2000, 'foreign book'),
+(3, 3000, 'new book');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `borrower`
+--
+
+CREATE TABLE IF NOT EXISTS `borrower` (
+  `borrower_id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` date NOT NULL,
+  `borrowed_copies` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `gender` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `dob` date NOT NULL,
+  `isbn` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `borrower`
+--
+
+INSERT INTO `borrower` (`borrower_id`, `name`, `username`, `password`, `borrowed_copies`, `department`, `gender`, `email`, `type`, `dob`, `isbn`) VALUES
+('1111', 'abhi', '1111', '2015-01-01', '2', 'computer science', 'male', 'abhijeetj.joshi@gmail.com', 'graduate student', '2015-01-01', 1),
+('2222', 'jeet', '2222', '2015-01-02', '5', 'electrical engineering', 'male', 'jeet@gmail.com', 'faculty', '2015-01-02', 2),
+('3333', 'shwetlana', '3333', '2015-01-03', '6', 'computer engineering', 'female', 'shw@gmail.com', 'vocational student', '2015-01-03', 3),
+('4444', 'jose', '4444', '2015-01-04', '8', 'management', 'male', 'jose@yahoo.com', 'staff', '2015-01-04', 4),
+('5555', 'Dr.Sun', '5555', '2015-01-05', '10', 'cyber security', 'male', 'cysun@crawler.com', 'college student', '2015-01-05', 5),
+('6666', 'john', '6666', '2015-01-06', '20', 'finance', 'male', 'john@bing.com', 'vocational student', '2015-01-06', 6),
+('7777', 'ashu', '7777', '2015-01-07', '54', 'computer science', 'male', 'ashu@chewing.com', 'undergraduate student', '2015-01-07', 7),
+('8888', 'chris', '8888', '2015-01-08', '53', 'finance', 'male', 'chris@facebook.com', 'college student', '2015-01-08', 8),
+('9999', 'cydney', '9999', '2015-01-09', '95', 'finance', 'female', 'cydney767@msn.com', 'graduate student', '2015-01-09', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `borrows`
+--
+
+CREATE TABLE IF NOT EXISTS `borrows` (
+  `borrower_id` varchar(255) NOT NULL,
+  `isbn` int(11) NOT NULL,
+  `lent_out` varchar(255) NOT NULL,
+  `issue` date NOT NULL,
+  `checkout` date NOT NULL,
+  `borrows_id` int(11) NOT NULL,
+  `due_date` date NOT NULL,
+  `return_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `borrows`
+--
+
+INSERT INTO `borrows` (`borrower_id`, `isbn`, `lent_out`, `issue`, `checkout`, `borrows_id`, `due_date`, `return_date`) VALUES
+('1111', 1, 'lent out', '2015-02-01', '2015-04-30', 1, '2015-08-25', '2015-05-01'),
+('2222', 2, 'lent out', '2015-02-02', '2015-04-29', 2, '2015-08-15', '2015-05-02'),
+('3333', 3, 'not lent out', '2015-02-03', '2015-04-28', 3, '2015-08-16', '2015-05-03'),
+('4444', 4, 'lent out', '2015-02-04', '2015-04-27', 4, '2015-08-17', '2015-05-04'),
+('5555', 5, 'lent out', '2015-02-05', '2015-04-26', 5, '2015-08-18', '2015-05-05'),
+('6666', 6, 'lent out', '2015-02-06', '2015-04-25', 6, '2015-08-19', '2015-05-06'),
+('6666', 6, 'lent out', '2015-02-06', '2015-04-25', 7, '2015-08-19', '0000-00-00'),
+('7777', 7, 'lent out', '2015-02-09', '2015-04-25', 8, '2015-09-25', '2015-08-25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `library`
+--
+
+CREATE TABLE IF NOT EXISTS `library` (
+  `branch_id` int(11) NOT NULL,
+  `branch_name` varchar(255) CHARACTER SET utf8 NOT NULL,
+`isbn` int(11) NOT NULL,
+  `no_of_copies` int(11) NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `library`
+--
+
+INSERT INTO `library` (`branch_id`, `branch_name`, `isbn`, `no_of_copies`, `type`, `address`) VALUES
+(101, 'kretzman hall', 1, 100000, 'branch a', '109 s almansor street '),
+(201, 'simpson hall', 2, 500000, 'branch b', '109 s almansor street'),
+(301, 'alhambra library', 3, 80000, 'branch c', '109 s almansor street');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `library_books`
+--
+
+CREATE TABLE IF NOT EXISTS `library_books` (
+  `branch_id` int(11) NOT NULL,
+  `isbn` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `library_books`
+--
+
+INSERT INTO `library_books` (`branch_id`, `isbn`) VALUES
+(101, 1),
+(201, 2),
+(301, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rules`
+--
+
+CREATE TABLE IF NOT EXISTS `rules` (
+  `borrower_id` varchar(255) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `loan_period` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `no_of_books` int(11) NOT NULL,
+  `extension times/day` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rules`
+--
+
+INSERT INTO `rules` (`borrower_id`, `book_id`, `loan_period`, `total`, `no_of_books`, `extension times/day`) VALUES
+('1111', 1, 90, 16, 12, 1),
+('2222', 2, 60, 9, 12, 1),
+('3333', 3, 60, 15, 9, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `book`
+--
+ALTER TABLE `book`
+ ADD PRIMARY KEY (`isbn`);
+
+--
+-- Indexes for table `book_type`
+--
+ALTER TABLE `book_type`
+ ADD PRIMARY KEY (`book_id`);
+
+--
+-- Indexes for table `borrower`
+--
+ALTER TABLE `borrower`
+ ADD PRIMARY KEY (`borrower_id`);
+
+--
+-- Indexes for table `borrows`
+--
+ALTER TABLE `borrows`
+ ADD PRIMARY KEY (`borrows_id`);
+
+--
+-- Indexes for table `library`
+--
+ALTER TABLE `library`
+ ADD PRIMARY KEY (`branch_id`), ADD KEY `isbn` (`isbn`);
+
+--
+-- Indexes for table `library_books`
+--
+ALTER TABLE `library_books`
+ ADD PRIMARY KEY (`branch_id`,`isbn`), ADD KEY `isbn` (`isbn`);
+
+--
+-- Indexes for table `rules`
+--
+ALTER TABLE `rules`
+ ADD PRIMARY KEY (`borrower_id`,`book_id`), ADD KEY `book_id` (`book_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `book`
+--
+ALTER TABLE `book`
+MODIFY `isbn` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `library`
+--
+ALTER TABLE `library`
+MODIFY `isbn` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `library_books`
+--
+ALTER TABLE `library_books`
+ADD CONSTRAINT `library_books_ibfk_1` FOREIGN KEY (`branch_id`) REFERENCES `library` (`branch_id`),
+ADD CONSTRAINT `library_books_ibfk_2` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`);
+
+--
+-- Constraints for table `rules`
+--
+ALTER TABLE `rules`
+ADD CONSTRAINT `rules_ibfk_1` FOREIGN KEY (`borrower_id`) REFERENCES `borrower` (`borrower_id`),
+ADD CONSTRAINT `rules_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book_type` (`book_id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
